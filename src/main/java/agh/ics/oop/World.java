@@ -1,50 +1,12 @@
 package agh.ics.oop;
 
+
 public class World {
-    public static void run(Direction[] directions) {
-        System.out.println("Start");
-        String message;
-        for (Direction direction : directions) {
-            switch (direction) {
-                case FORWARDS:
-                    message = "do przodu";
-                    break;
-                case BACKWARDS:
-                    message = "do tyłu";
-                    break;
-                case RIGHT:
-                    message = "w prawo";
-                    break;
-                case LEFT:
-                    message = "w lewo";
-                    break;
-                default:
-                    continue;
-            }
-            System.out.println("Zwierzak idzie " + message);
-        }
-        System.out.println("Stop");
-    }
-
-    public static Direction[] changeArguments(String[] args) {
-        Direction[] newDirs = new Direction[args.length];
-        for (int i = 0; i < args.length; i++) {
-            switch (args[i]) {
-                case "l" -> newDirs[i] = Direction.LEFT;
-                case "r" -> newDirs[i] = Direction.RIGHT;
-                case "b" -> newDirs[i] = Direction.BACKWARDS;
-                case "f" -> newDirs[i] = Direction.FORWARDS;
-            }
-        }
-        return newDirs;
-    }
-
     public static void main(String[] args) {
-        Animal kamil = new Animal();
-        OptionsParser parser = new OptionsParser();
-        for (MoveDirection direction : parser.parse(args)) {
-            kamil.move(direction);
-            System.out.println(kamil);
-        }
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
     }
 }

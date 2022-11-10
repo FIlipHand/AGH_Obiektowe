@@ -1,6 +1,14 @@
 package agh.ics.oop;
 
-public record Vector2d(int x, int y) {
+public class Vector2d {
+    public static final Vector2d VEC_0_0 = new Vector2d(0, 0);
+    final public int x;
+    final public int y;
+
+    public Vector2d(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     @Override
     public String toString() {
@@ -33,6 +41,24 @@ public record Vector2d(int x, int y) {
 
     public Vector2d opposite() {
         return new Vector2d(-1 * this.x, -1 * this.y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vector2d vector2d = (Vector2d) o;
+
+        if (x != vector2d.x) return false;
+        return y == vector2d.y;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = 31 * result + y;
+        return result;
     }
 
     public static void main(String[] args) {

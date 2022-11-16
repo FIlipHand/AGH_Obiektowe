@@ -40,9 +40,11 @@ public class World {
     }
 
     public static void main(String[] args) {
-        System.out.println("system wystartował");
-        Direction[] directions = changeArguments(args);
-        run(directions);
-        System.out.println("system zakończył działanie");
+        Animal kamil = new Animal();
+        OptionsParser parser = new OptionsParser();
+        for (MoveDirection direction : parser.parse(args)) {
+            kamil.move(direction);
+            System.out.println(kamil);
+        }
     }
 }

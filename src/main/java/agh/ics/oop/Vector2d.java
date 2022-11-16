@@ -1,13 +1,6 @@
 package agh.ics.oop;
 
-public class Vector2d {
-    final public int x;
-    final public int y;
-
-    public Vector2d(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
+public record Vector2d(int x, int y) {
 
     @Override
     public String toString() {
@@ -36,24 +29,6 @@ public class Vector2d {
 
     public Vector2d subtract(Vector2d other) {
         return new Vector2d(this.x - other.x, this.y - other.y);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Vector2d vector2d = (Vector2d) o;
-
-        if (x != vector2d.x) return false;
-        return y == vector2d.y;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = x;
-        result = 31 * result + y;
-        return result;
     }
 
     public Vector2d opposite() {

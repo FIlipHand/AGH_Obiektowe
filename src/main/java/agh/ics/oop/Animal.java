@@ -12,11 +12,12 @@ public class Animal {
     }
 
     public Animal(IWorldMap map, Vector2d initial_position) {
-        this.map = map;
+        this(map);
         this.position = initial_position;
     }
 
     public Animal() {
+        this(new RectangularMap(4, 4));
     }
 
 

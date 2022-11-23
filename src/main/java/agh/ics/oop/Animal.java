@@ -1,8 +1,24 @@
 package agh.ics.oop;
 
+import java.util.Objects;
+
 public class Animal {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d position = new Vector2d(2, 2);
+    private IWorldMap map;
+
+    public Animal(IWorldMap map) {
+        this.map = map;
+    }
+
+    public Animal(IWorldMap map, Vector2d initial_position) {
+        this.map = map;
+        this.position = initial_position;
+    }
+
+    public Animal() {
+    }
+
 
     public Vector2d getPosition() {
         return position;
@@ -14,14 +30,16 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Animal{" +
-                "oprientation=" + orientation +
-                ", position=" + position +
-                '}';
+        return switch (orientation) {
+            case NORTH -> "^";
+            case SOUTH -> "v";
+            case WEST -> "<";
+            case EAST -> ">";
+        };
     }
 
     public boolean isAt(Vector2d other_position) {
-        return this.position.equals(other_position);
+        return Objects.equals(this.position, other_position);
     }
 
     public void move(MoveDirection direction) {
@@ -31,13 +49,13 @@ public class Animal {
             case LEFT -> this.orientation = this.orientation.previous();
             case FORWARD -> {
                 new_position = this.position.add(this.orientation.toUnitVector());
-                if (new Vector2d(4, 4).precedes(new_position) && new Vector2d(0, 0).follows(new_position)) {
+                if (this.map.canMoveTo(new_position)) {
                     this.position = new_position;
                 }
             }
             case BACKWARD -> {
                 new_position = this.position.add(this.orientation.toUnitVector().opposite());
-                if (new Vector2d(4, 4).precedes(new_position) && new Vector2d(0, 0).follows(new_position)) {
+                if (this.map.canMoveTo(new_position)) {
                     this.position = new_position;
                 }
             }

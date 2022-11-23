@@ -16,7 +16,8 @@ public class RectangularMap extends AbstractWorldMap implements IWorldMap {
 
     @Override
     public Object objectAt(Vector2d position) {
-        return animalList.stream().filter(animal -> animal.isAt(position)).findFirst().orElse(null);
+//        return animalList.stream().filter(animal -> animal.isAt(position)).findFirst().orElse(null);
+        return animalMap.get(position);
     }
 
     public Pair<Vector2d, Vector2d> getMapBoundaries() {

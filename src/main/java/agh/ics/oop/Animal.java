@@ -1,11 +1,14 @@
 package agh.ics.oop;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Animal implements IMapElement{
+public class Animal implements IMapElement {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d position = new Vector2d(2, 2);
     private IWorldMap map;
+    private List<IPositionChangeObserver> observers = new ArrayList<>();
 
     public Animal(IWorldMap map) {
         this.map = map;
@@ -52,18 +55,32 @@ public class Animal implements IMapElement{
             case FORWARD -> {
                 new_position = this.position.add(this.orientation.toUnitVector());
                 if (this.map.canMoveTo(new_position)) {
+                    positionChanged(this.position, new_position);
                     this.position = new_position;
                 }
             }
             case BACKWARD -> {
                 new_position = this.position.add(this.orientation.toUnitVector().opposite());
                 if (this.map.canMoveTo(new_position)) {
+                    positionChanged(this.position, new_position);
                     this.position = new_position;
                 }
             }
             default -> {
             }
         }
+    }
+
+    public void addObserver(IPositionChangeObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(IPositionChangeObserver observer) {
+        observers.remove(observer);
+    }
+
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        this.observers.forEach(e -> e.positionChanged(oldPosition, newPosition));
     }
     // ZADANIE 10
     // Jednym z rozwiązań tego problemu skojarzyło mi sie ze wzorcem projektowym singleton, który

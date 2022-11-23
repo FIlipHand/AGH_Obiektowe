@@ -15,6 +15,10 @@ public class SimulationEngine implements IEngine {
         this.animalList = new ArrayList<>();
         for (Vector2d position : starting_positions) {
             Animal new_animal = new Animal(map, position);
+            // Nie jestem pewien czy to jest poprawne rozwiązanie, ponieważ nie mówiliśmy o takim castowaniu,
+            // ale przynajmniej przy mojej implementacji zadań jest to (chyba) jedyne możliwe rozwiązanie...
+            // I działa więc chyba nie trzeba się przejmować ¯\_(ツ)_/¯
+            new_animal.addObserver((IPositionChangeObserver) map);
             animalList.add(new_animal);
             map.place(new_animal);
         }
@@ -28,7 +32,6 @@ public class SimulationEngine implements IEngine {
             animalList.get(i % animalList.size()).move(directions[i]);
             System.out.println(gameMap);
         }
-//        IntStream.range(0, directions.length).forEach(i -> animalList.get(i % animalList.size()).move(directions[i]));
     }
 
 }

@@ -5,6 +5,14 @@ public class Vector2d {
     final public int x;
     final public int y;
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public Vector2d(int x, int y) {
         this.x = x;
         this.y = y;
@@ -59,20 +67,6 @@ public class Vector2d {
         int result = x;
         result = 31 * result + y;
         return result;
-    }
-
-    public static void main(String[] args) {
-        Vector2d position1 = new Vector2d(1, 2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2, 1);
-        System.out.println(position2);
-        System.out.println(position1.add(position2));
-        System.out.println(position1.opposite());
-
-        MapDirection west = MapDirection.WEST;
-        System.out.println(west.next());
-        System.out.println(west.previous());
-        System.out.println(west.toUnitVector());
     }
 }
 

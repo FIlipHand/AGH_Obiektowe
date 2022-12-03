@@ -18,7 +18,7 @@ public class SimulationEngine implements IEngine {
             // Nie jestem pewien czy to jest poprawne rozwiązanie, ponieważ nie mówiliśmy o takim castowaniu,
             // ale przynajmniej przy mojej implementacji zadań jest to (chyba) jedyne możliwe rozwiązanie...
             // I działa więc chyba nie trzeba się przejmować ¯\_(ツ)_/¯
-            new_animal.addObserver((IPositionChangeObserver) map);
+            new_animal.addObserver(map);
             animalList.add(new_animal);
             map.place(new_animal);
         }

@@ -15,8 +15,6 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         return false;
     }
 
-    public abstract Pair<Vector2d, Vector2d> getMapBoundaries();
-
     @Override
     public String toString() {
         Pair<Vector2d, Vector2d> mapBoundaries = this.getMapBoundaries();

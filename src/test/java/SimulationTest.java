@@ -17,6 +17,9 @@ public class SimulationTest {
                 MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.FORWARD});
         // it might have been an overkill
 
+        //Check if parser throws exception
+        assertThrows(IllegalArgumentException.class, () -> new OptionsParser().parse(new String[]{"f", "krowa"}));
+
         IWorldMap map = new RectangularMap(10, 5);
         Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
 

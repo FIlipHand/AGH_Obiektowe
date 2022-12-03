@@ -20,6 +20,7 @@ public class GrassFieldTest {
     public void objectAt_test() {
         IWorldMap map = new GrassField(10);
         map.place(new Animal(map, new Vector2d(2, 2)));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map, new Vector2d(-1, -10))));
         assertNotNull(map.objectAt(new Vector2d(2, 2)));
         assertEquals(map.objectAt(new Vector2d(2,2)).getClass(), Animal.class);
     }

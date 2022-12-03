@@ -52,7 +52,8 @@ public class AnimalTest {
     @Test
     public void check_command_line_args() {
         Animal krewetka_modliszkowa = new Animal();
-        String[] args = {"f", "forward", "r", "l", "left", "b", "O_O"};
+        // tutaj pewnie try powinien być zamiast usuniętego argumentu, ale w sumie nie to tutaj testujemy do końca
+        String[] args = {"f", "forward", "r", "l", "left", "b"};
         OptionsParser parser = new OptionsParser();
         MoveDirection[] array = parser.parse(args);
         for (MoveDirection direction : array) {

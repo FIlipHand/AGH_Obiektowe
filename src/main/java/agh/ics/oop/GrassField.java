@@ -43,12 +43,6 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
 
     @Override
     public Object objectAt(Vector2d position) {
-//        było podejście do fajnego streama ale niestety klasy obiektów sie nie zgadzają
-//        return animalList.stream().filter(animal -> animal.getPosition().equals(position))
-//                .findFirst()
-//                .orElse(grassList.stream().filter(grass -> grass.getPosition().equals(position)).findFirst().orElse(null));
-
-
         if (this.animalMap.containsKey(position)) {
             return this.animalMap.get(position);
         }

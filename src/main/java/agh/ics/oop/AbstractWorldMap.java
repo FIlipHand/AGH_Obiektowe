@@ -12,7 +12,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
             animalMap.put(position, animal);
             return true;
         }
-        return false;
+        throw new IllegalArgumentException("Animal cannot be place on this field.");
     }
 
     @Override

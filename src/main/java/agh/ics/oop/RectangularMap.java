@@ -20,7 +20,7 @@ public class RectangularMap extends AbstractWorldMap implements IWorldMap {
         return animalMap.get(position);
     }
 
-    public Pair<Vector2d, Vector2d> getMapBoundaries() {
-        return new Pair<>(Vector2d.VEC_0_0, new Vector2d(width, height));
-    }
+//    public Pair<Vector2d, Vector2d> getMapBoundaries() {
+//        return new Pair<>(Vector2d.VEC_0_0, new Vector2d(width, height));
+//    }
 }

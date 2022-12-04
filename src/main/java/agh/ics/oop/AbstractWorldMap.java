@@ -5,6 +5,7 @@ import java.util.Map;
 
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     protected Map<Vector2d, Animal> animalMap = new HashMap<>();
+    protected MapBoundary mapBoundary = new MapBoundary();
 
     public boolean place(Animal animal) {
         Vector2d position = animal.getPosition();
@@ -17,7 +18,8 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
 
     @Override
     public String toString() {
-        Pair<Vector2d, Vector2d> mapBoundaries = this.getMapBoundaries();
+//        Pair<Vector2d, Vector2d> mapBoundaries = this.getMapBoundaries();
+        Pair<Vector2d, Vector2d> mapBoundaries = getMapBoundaries();
         return new MapVisualizer(this).draw(mapBoundaries.getFirst(), mapBoundaries.getSecond());
     }
 
@@ -26,5 +28,15 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         Animal animal = this.animalMap.get(oldPosition);
         this.animalMap.remove(oldPosition);
         this.animalMap.put(newPosition, animal);
+    }
+
+    @Override
+    public Pair<Vector2d, Vector2d> getMapBoundaries() {
+        return this.mapBoundary.getMapBoundaries();
+    }
+
+    @Override
+    public MapBoundary getMapBoundaryInstance() {
+        return this.mapBoundary;
     }
 }

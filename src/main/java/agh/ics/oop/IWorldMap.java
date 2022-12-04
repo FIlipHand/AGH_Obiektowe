@@ -48,4 +48,5 @@ public interface IWorldMap extends IPositionChangeObserver {
      */
     Object objectAt(Vector2d position);
     Pair<Vector2d, Vector2d> getMapBoundaries();
+    MapBoundary getMapBoundaryInstance();
 }

@@ -27,7 +27,7 @@ public class App extends Application {
         map = new GrassField(10);
         Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
         engine = new SimulationEngine(directions, map, positions);
-//        engine.run();
+        engine.run();
     }
 
     @Override
@@ -44,13 +44,17 @@ public class App extends Application {
         gridPane.getRowConstraints().add(new RowConstraints(30));
 
         // Draw boundaries
-        gridPane.add(new Label("x/y"), 0, 0);
+        Label corner = new Label("x/y");
+        gridPane.add(corner, 0, 0);
+        GridPane.setHalignment(corner, HPos.CENTER);
         for (int i = 0; i <= x_2 - x_1; i++) {
+            gridPane.getColumnConstraints().add(new ColumnConstraints(30));
             Label label = new Label(String.valueOf(i + x_1));
             gridPane.add(label, i + 1, 0);
             GridPane.setHalignment(label, HPos.CENTER);
         }
         for (int i = 0; i <= y_2 - y_1; i++) {
+            gridPane.getRowConstraints().add(new RowConstraints(30));
             Label label = new Label(String.valueOf(y_2 - i));
             GridPane.setHalignment(label, HPos.CENTER);
             gridPane.add(label, 0, i + 1);

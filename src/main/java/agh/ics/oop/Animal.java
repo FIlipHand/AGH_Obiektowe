@@ -43,6 +43,16 @@ public class Animal implements IMapElement {
         };
     }
 
+    @Override
+    public String getImagePath() {
+        return switch (orientation) {
+            case NORTH -> "src/main/resources/up.png";
+            case SOUTH -> "src/main/resources/down.png";
+            case WEST -> "src/main/resources/right.png";
+            case EAST -> "src/main/resources/left.png";
+        };
+    }
+
     public boolean isAt(Vector2d other_position) {
         return Objects.equals(this.position, other_position);
     }

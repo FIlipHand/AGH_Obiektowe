@@ -6,4 +6,6 @@ public interface IMapElement {
 
     @Override
     String toString();
+
+    String getImagePath();
 }

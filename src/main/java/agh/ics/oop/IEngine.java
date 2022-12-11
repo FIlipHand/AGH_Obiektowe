@@ -16,4 +16,5 @@ public interface IEngine extends Runnable{
     void run();
 
     void addObserver(ISimulationObserver simulationObserver);
+    void setDirections(String[] arguments);
 }

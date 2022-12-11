@@ -11,8 +11,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class GuiElementBox {
-    final static int WIDTH = 20;
-    final static int HEIGHT = 20;
+    final static int WIDTH = 45;
+    final static int HEIGHT = 45;
     private VBox verticalBox;
 
     public GuiElementBox(IMapElement element) {

@@ -12,8 +12,12 @@ public class SimulationEngine implements IEngine {
 
     private ISimulationObserver observer;
 
-    public SimulationEngine(MoveDirection[] directions, IWorldMap map, Vector2d[] starting_positions) {
-        this.directions = directions;
+    @Override
+    public void setDirections(String[] arguments){
+        this.directions = new OptionsParser().parse(arguments);
+    }
+
+    public SimulationEngine(IWorldMap map, Vector2d[] starting_positions) {
         this.animalList = new ArrayList<>();
         for (Vector2d position : starting_positions) {
             Animal new_animal = new Animal(map, position);

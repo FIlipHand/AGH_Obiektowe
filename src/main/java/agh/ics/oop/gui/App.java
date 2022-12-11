@@ -5,7 +5,9 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -15,25 +17,29 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private IWorldMap map;
-    private static final int WIDTH = 50;
-    private static final int HEIGHT = 50;
+    private static final int WIDTH = 60;
+    private static final int HEIGHT = 60;
     private GridPane gridPane = new GridPane();
+    private VBox startBox;
 
     @Override
     public void init() throws Exception {
         super.init();
-        MoveDirection[] directions = new MoveDirection[0];
-        try {
-            directions = new OptionsParser().parse(getParameters().getRaw().toArray(new String[0]));
-        } catch (IllegalArgumentException e) {
-            System.exit(0);
-        }
         map = new GrassField(10);
         Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
-        IEngine engine = new SimulationEngine(directions, map, positions);
+        IEngine engine = new SimulationEngine(map, positions);
         Thread thread = new Thread(engine);
         engine.addObserver(() -> Platform.runLater(this::drawGridElements));
-        thread.start();
+
+        TextField textField = new TextField();
+        Button button = new Button("Start");
+        button.setOnAction(a -> {
+            engine.setDirections(textField.getText().split(" "));
+            thread.start();
+            button.setDisable(true);
+        });
+        startBox = new VBox(textField, button);
+        drawGridElements();
     }
 
     private void drawGridElements() {
@@ -84,7 +90,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(gridPane, 600, 600);
+        VBox everything = new VBox(this.startBox ,gridPane);
+        Scene scene = new Scene(everything, 800, 800);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

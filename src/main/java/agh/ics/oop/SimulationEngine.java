@@ -27,16 +27,14 @@ public class SimulationEngine implements IEngine {
 
     @Override
     public void run() {
-//        System.out.println(gameMap);
         for (int i = 0; i < directions.length; ++i) {
-//            observer.objectPositionChanged();
             animalList.get(i % animalList.size()).move(directions[i]);
             try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            System.out.println(gameMap);
+            observer.objectPositionChanged();
         }
     }
 

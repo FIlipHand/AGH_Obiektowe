@@ -2,6 +2,7 @@ package agh.ics.oop.gui;
 
 import agh.ics.oop.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -14,9 +15,9 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private IWorldMap map;
-    private IEngine engine;
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
+    private GridPane gridPane = new GridPane();
 
     @Override
     public void init() throws Exception {
@@ -29,13 +30,19 @@ public class App extends Application {
         }
         map = new GrassField(10);
         Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
-        engine = new SimulationEngine(directions, map, positions);
+        IEngine engine = new SimulationEngine(directions, map, positions);
         Thread thread = new Thread(engine);
-//        engine.addObserver();
+        engine.addObserver(() -> Platform.runLater(this::drawGridElements));
         thread.start();
     }
 
-    private void drawGridElements(GridPane gridPane) {
+    private void drawGridElements() {
+        gridPane.setGridLinesVisible(false);
+        gridPane.getChildren().clear();
+        gridPane.getColumnConstraints().clear();
+        gridPane.getRowConstraints().clear();
+        gridPane.setGridLinesVisible(true);
+
         Pair<Vector2d, Vector2d> boundaries = map.getMapBoundaries();
         int x_1 = boundaries.getFirst().x;
         int y_1 = boundaries.getFirst().y;
@@ -77,15 +84,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GridPane gridPane = new GridPane();
-
         Scene scene = new Scene(gridPane, 600, 600);
-        gridPane.getChildren().clear();
-        gridPane.setGridLinesVisible(true);
-        drawGridElements(gridPane);
-
-//        engine.run();
-
         primaryStage.setScene(scene);
         primaryStage.show();
     }

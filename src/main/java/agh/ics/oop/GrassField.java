@@ -39,7 +39,7 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
     @Override
     public boolean canMoveTo(Vector2d position) {
         // to nie jest dobre rozwiązanie, ale działa
-        return Vector2d.VEC_0_0.follows(position) && (!isOccupied(position) || objectAt(position) instanceof Grass);
+        return !isOccupied(position) || objectAt(position) instanceof Grass;
     }
 
     @Override

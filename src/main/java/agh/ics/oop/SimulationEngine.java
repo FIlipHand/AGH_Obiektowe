@@ -10,8 +10,14 @@ public class SimulationEngine implements IEngine {
     private List<Animal> animalList;
     private IWorldMap gameMap;
 
-    public SimulationEngine(MoveDirection[] directions, IWorldMap map, Vector2d[] starting_positions) {
-        this.directions = directions;
+    private ISimulationObserver observer;
+
+    @Override
+    public void setDirections(String[] arguments){
+        this.directions = new OptionsParser().parse(arguments);
+    }
+
+    public SimulationEngine(IWorldMap map, Vector2d[] starting_positions) {
         this.animalList = new ArrayList<>();
         for (Vector2d position : starting_positions) {
             Animal new_animal = new Animal(map, position);
@@ -25,11 +31,19 @@ public class SimulationEngine implements IEngine {
 
     @Override
     public void run() {
-        System.out.println(gameMap);
         for (int i = 0; i < directions.length; ++i) {
             animalList.get(i % animalList.size()).move(directions[i]);
-            System.out.println(gameMap);
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            observer.objectPositionChanged();
         }
     }
 
+    @Override
+    public void addObserver(ISimulationObserver simulationObserver) {
+        this.observer = simulationObserver;
+    }
 }

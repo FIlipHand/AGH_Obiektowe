@@ -23,7 +23,8 @@ public class SimulationTest {
         IWorldMap map = new RectangularMap(10, 5);
         Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
 
-        IEngine engine = new SimulationEngine(directions, map, positions);
+        IEngine engine = new SimulationEngine(map, positions);
+        engine.setDirections(args);
 
         // check if animals are created on proper tiles
         assertEquals(map.objectAt(new Vector2d(2, 2)).getClass(), Animal.class);

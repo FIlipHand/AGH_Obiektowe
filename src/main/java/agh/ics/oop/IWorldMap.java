@@ -7,7 +7,7 @@ package agh.ics.oop;
  * @author apohllo
  *
  */
-public interface IWorldMap {
+public interface IWorldMap extends IPositionChangeObserver {
     /**
      * Indicate if any object can move to the given position.
      *
@@ -47,4 +47,6 @@ public interface IWorldMap {
      * @return Object or null if the position is not occupied.
      */
     Object objectAt(Vector2d position);
+    Pair<Vector2d, Vector2d> getMapBoundaries();
+    MapBoundary getMapBoundaryInstance();
 }

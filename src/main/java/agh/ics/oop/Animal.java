@@ -79,15 +79,7 @@ public class Animal implements IMapElement {
         observers.remove(observer);
     }
 
-    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+    private void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         this.observers.forEach(e -> e.positionChanged(oldPosition, newPosition));
     }
-    // ZADANIE 10
-    // Jednym z rozwiązań tego problemu skojarzyło mi sie ze wzorcem projektowym singleton, który
-    // pozwala na stowrzenie ściśle okreslonej liczby obiektów danego typu. Nie jest to może identyczny przykład,
-    // ale idea jest podpobna.
-    // Za każdym razem jak tworzymy obiekt Animal sprawdzamy czy w systemie nie ma już innego obiektu na tej pozycji.
-    // W przypadku wzorca posiadalismy metodę statyczna, która zwracała referencje. Tutaj możemy przechowywać
-    // w strukturze wszystkieobiekty tworzone przez konstruktor, i za kazdym razem sprawdzać czy nie ma już zwierzęcia,
-    // które istnieje na danym polu.
 }

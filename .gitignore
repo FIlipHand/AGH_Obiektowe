@@ -25,3 +25,8 @@ hs_err_pid*
 build/
 .gradle/
 .idea/
+
+KotlinZajecia/build/
+KotlinZajecia/.gradle/
+KotlinZajecia/.idea/
+
